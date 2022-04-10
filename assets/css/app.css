@@ -302,9 +302,70 @@
     @apply py-2;
   }
 
+  .resource__cell--present {
+    @apply resource__cell;
+  }
+
+  .resource__cell--present:hover {
+    @apply outline;
+    @apply outline-4;
+    @apply cursor-zoom-in;
+
+    outline-offset: -4px;
+  }
+
   .cell__contents {
     @apply max-h-20;
     @apply overflow-y-auto;
+  }
+
+  .cell__zoom {
+    @apply z-40;
+    @apply fixed;
+    @apply top-0;
+    @apply left-0;
+    @apply h-full;
+    @apply w-full;
+    @apply flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply bg-white;
+    @apply bg-opacity-50;
+    @apply cursor-zoom-out;
+  }
+
+  .zoom__container {
+    @apply rounded-lg;
+    @apply bg-white;
+    @apply border-2;
+    @apply cursor-default;
+    @apply relative;
+
+    height: 75%;
+    width: 75%;
+  }
+
+  .zoom__content {
+    @apply grid;
+    @apply justify-items-center;
+    @apply content-center;
+    @apply whitespace-pre-wrap;
+    @apply p-10;
+    @apply overflow-x-hidden;
+    @apply h-full;
+  }
+
+  .zoom__container svg {
+    @apply absolute;
+    @apply bottom-0;
+    @apply right-0;
+    @apply w-5;
+    @apply h-5;
+    @apply m-1;
+  }
+
+  .zoom_copy {
+    @apply cursor-pointer;
   }
 
   .resource__form {

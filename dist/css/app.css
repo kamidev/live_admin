@@ -854,9 +854,73 @@ select:focus {
   padding-bottom: 0.5rem;
 }
 
+.resource__cell--present {
+  border-width: 1px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.resource__cell--present:hover {
+  outline-style: solid;
+  outline-width: 4px;
+  cursor: zoom-in;
+  outline-offset: -4px;
+}
+
 .cell__contents {
   max-height: 5rem;
   overflow-y: auto;
+}
+
+.cell__zoom {
+  z-index: 40;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.5;
+  cursor: zoom-out;
+}
+
+.zoom__container {
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  border-width: 2px;
+  cursor: default;
+  position: relative;
+  height: 75%;
+  width: 75%;
+}
+
+.zoom__content {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  white-space: pre-wrap;
+  padding: 2.5rem;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.zoom__container svg {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.25rem;
+}
+
+.zoom_copy {
+  cursor: pointer;
 }
 
 .resource__form {
@@ -974,6 +1038,10 @@ select:focus {
 
 .table {
   display: table;
+}
+
+.hidden {
+  display: none;
 }
 
 .w-full {

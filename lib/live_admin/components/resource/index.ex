@@ -96,9 +96,15 @@ defmodule LiveAdmin.Components.Container.Index do
           <%= for record <- @records |> elem(0) do %>
             <tr>
               <%= for {field, _, _} <- Resource.fields(@resource, @config) do %>
-                <td class="resource__cell">
-                  <div class="cell__contents">
+                <td class={"resource__cell#{if Map.fetch!(record, field), do: "--present"}"} phx-hook={if Map.fetch!(record, field), do: "ResourceCell"} id={"#{record.id}-#{field}"}>
+                  <div class="cell__contents" >
                     <%= display_field(record, field, assigns) %>
+                  </div>
+                  <div class="cell__zoom hidden">
+                    <div class="zoom__container">
+                      <div class="zoom__content" id={"record-#{record.id}-#{field}-content"}><%= print(Map.fetch!(record, field)) %></div>
+                      <div class="zoom_copy" data-clipboard-target={"#record-#{record.id}-#{field}-content"}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M 4 2 C 2.895 2 2 2.895 2 4 L 2 18 L 4 18 L 4 4 L 18 4 L 18 2 L 4 2 z M 8 6 C 6.895 6 6 6.895 6 8 L 6 20 C 6 21.105 6.895 22 8 22 L 20 22 C 21.105 22 22 21.105 22 20 L 22 8 C 22 6.895 21.105 6 20 6 L 8 6 z M 8 8 L 20 8 L 20 20 L 8 20 L 8 8 z"/></svg></div>
+                    </div>
                   </div>
                 </td>
               <% end %>
@@ -273,7 +279,7 @@ defmodule LiveAdmin.Components.Container.Index do
         class: "resource__action--btn"
       )
     else
-      _ -> record |> Map.fetch!(field_name) |> inspect()
+      _ -> record |> Map.fetch!(field_name) |> print()
     end
   end
 
@@ -286,4 +292,7 @@ defmodule LiveAdmin.Components.Container.Index do
       fk == schema.__schema__(:association, assoc_name).owner_key
     end)
   end
+
+  defp print(term) when is_binary(term), do: term
+  defp print(term), do: inspect(term)
 end
